@@ -61,12 +61,14 @@ export class DemoStack extends cdk.Stack {
               'cd flask-docker-app',
               'docker build -t $ECR_REPO_URI:$TAG .',
               'docker push $ECR_REPO_URI:$TAG',
+              'aws ecr start-image-scan --repository-name $ECR_REPO_URI --image-id imageTag=$TAG --region $AWS_DEFAULT_REGION',
             ],
           },
           post_build: {
             commands: [
+              'sleep 15',
               '/usr/local/bin/image_scan.sh $ECR_REPO_URI $TAG $AWS_DEFAULT_REGION',
-              // 'kubectl get no',
+              'kubectl get no',
               'kubectl set image deployment flask-deployment flask=$ECR_REPO_URI:$TAG',
             ],
           },
