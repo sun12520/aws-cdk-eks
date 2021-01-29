@@ -4,7 +4,7 @@ RUN pip install flask
 
 ENV FLASK_APP app.py
 
-ENV PLATFORM 'Amazon EKS'
+ENV PLATFORM 'Amazon EKS Sunny New'
 
 WORKDIR /app
 COPY . /app/
