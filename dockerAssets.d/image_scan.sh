@@ -15,7 +15,8 @@ for line in `aws ecr describe-image-scan-findings --repository-name $ECR_REPO_UR
 do
     # echo $line
     level=`echo $line| grep 'FINDINGS' | awk -F " " '{print $3}'`
-    if [ $level == 'High' ] || [ $level == 'Critical' ];then
+    echo $level
+    if [ $level == 'High' ] || [ $level == 'Critical' ] || [ $level == 'MEDIUM' ] ;then
         echo 'ERROR'
         exit 1
     fi
