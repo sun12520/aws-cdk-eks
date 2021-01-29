@@ -65,7 +65,7 @@ export class DemoStack extends cdk.Stack {
           },
           post_build: {
             commands: [
-              // '/usr/local/bin/image_scan.sh $ECR_REPO_URI $TAG $AWS_DEFAULT_REGION',
+              '/usr/local/bin/image_scan.sh $ECR_REPO_URI $TAG $AWS_DEFAULT_REGION',
               'kubectl get no',
               'kubectl set image deployment flask-deployment flask=$ECR_REPO_URI:$TAG',
             ],
