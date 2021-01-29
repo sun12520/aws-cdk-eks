@@ -37,8 +37,9 @@ RUN curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/${KUBECTL_VERS
 WORKDIR $HOME
 
 COPY entrypoint.sh /usr/local/bin/entrypoint.sh
+COPY image_scan.sh /usr/local/bin/image_scan.sh
 
-RUN chmod a+x /usr/local/bin/kubectl /usr/local/bin/entrypoint.sh
+RUN chmod a+x /usr/local/bin/kubectl /usr/local/bin/entrypoint.sh /usr/local/bin/image_scan.sh
 
 
 # USER kubectl
