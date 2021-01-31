@@ -61,6 +61,7 @@ export class DemoStack extends cdk.Stack {
           },
           build: {
             commands: [
+              'flake8 flask-docker-app',
               'cd flask-docker-app',
               'docker build -t $ECR_REPO_URI:$TAG .',
               'docker push $ECR_REPO_URI:$TAG',
