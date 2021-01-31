@@ -29,7 +29,7 @@ function check_opa(){
         if(exists){
             // console.log('file exists');
             const execSync = require('child_process').execSync;
-            const output = execSync('/home/ec2-user/environment/opa eval --format pretty -i cdk.out/eks-cicd-codebuild-stack.template.json -d ../opa_cdk.rego data');
+            const output = execSync('/home/ec2-user/environment/opa eval --format pretty -i cdk.out/eks-cicd-codebuild-stack.template.json -d opa_cdk.rego data');
             console.log(output.toString());
             const resoutput = JSON.parse(output.toString());
             for(var police in resoutput.opa_cdk){
