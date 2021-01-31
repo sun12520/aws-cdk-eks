@@ -57,6 +57,7 @@ export class DemoStack extends cdk.Stack {
               '/usr/local/bin/entrypoint.sh',
               'echo Logging in to Amazon ECR',
               'aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT_ID.dkr.ecr.$AWS_DEFAULT_REGION.amazonaws.com',
+              'aws ecr --region $region describe-repositories --repository-names $ECR_REPO_NAME || aws ecr --region $region create-repository --repository-name $ECR_REPO_NAME',
             ],
           },
           build: {

@@ -47,7 +47,7 @@ export AWS_DEFAULT_REGION=$region
 CLUSTER_NAME=${CLUSTER_NAME-default}
 
 check_eks_status(){
-    [[ `aws eks --region $region describe-cluster --name $CLUSTER_NAME --query "cluster.status"` != '"ACTIVE"' ]] && echo 'EKS is active' ||  exit 1
+    [[ `aws eks --region $region describe-cluster --name $CLUSTER_NAME --query "cluster.status"` != '"ACTIVE"' ]] && echo '[INFO]EKS is active' ||  exit 1
 }
 
 update_kubeconfig(){
@@ -58,8 +58,6 @@ update_kubeconfig(){
         aws eks update-kubeconfig --name $CLUSTER_NAME --kubeconfig $KUBECONFIG    
     fi
 }
-
-aws ecr --region $region describe-repositories --repository-names $ECR_REPO_NAME || aws ecr --region $region create-repository --repository-name $ECR_REPO_NAME
 
 check_eks_status
 update_kubeconfig
