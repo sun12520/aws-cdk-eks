@@ -47,7 +47,12 @@ export AWS_DEFAULT_REGION=$region
 CLUSTER_NAME=${CLUSTER_NAME-default}
 
 check_eks_status(){
-    [[ `aws eks --region $region describe-cluster --name $CLUSTER_NAME --query "cluster.status"` == '"ACTIVE"' ]] && echo "[INFO]EKS is active" ||  exit 1
+    if [[ `aws eks --region $region describe-cluster --name $CLUSTER_NAME --query "cluster.status"` == '"ACTIVE"' ]];then
+        echo "[INFO]EKS is active" 
+    else
+        echo "[ERROR]EKS is not active"
+        exit 1
+    fi
 }
 
 update_kubeconfig(){
