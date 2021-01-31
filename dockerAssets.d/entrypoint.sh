@@ -46,6 +46,10 @@ export AWS_DEFAULT_REGION=$region
 
 CLUSTER_NAME=${CLUSTER_NAME-default}
 
+check_eks_status(){
+    [[ `aws eks --region $region describe-cluster --name $CLUSTER_NAME --query "cluster.status"` != '"ACTIVE"' ]] && echo 'EKS is active' ||  exit 1
+}
+
 update_kubeconfig(){
     if [[ -n ${EKS_ROLE_ARN} ]]; then
         echo "[INFO] got EKS_ROLE_ARN=${EKS_ROLE_ARN}, updating kubeconfig with this role"
@@ -55,5 +59,8 @@ update_kubeconfig(){
     fi
 }
 
+aws ecr --region $region describe-repositories --repository-names $ECR_REPO_NAME || aws ecr --region $region create-repository --repository-name $ECR_REPO_NAME
+
+check_eks_status
 update_kubeconfig
 exec "$@"

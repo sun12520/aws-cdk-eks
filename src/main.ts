@@ -1,11 +1,3 @@
-// import * as path from 'path';
-// import * as codebuild from '@aws-cdk/aws-codebuild';
-// import * as codecommit from '@aws-cdk/aws-codecommit';
-// import * as ec2 from '@aws-cdk/aws-ec2';
-// import * as ecr from '@aws-cdk/aws-ecr';
-// import * as eks from '@aws-cdk/aws-eks';
-// import * as targets from '@aws-cdk/aws-events-targets';
-// import * as iam from '@aws-cdk/aws-iam';
 import * as cdk from '@aws-cdk/core';
 import { DemoStack } from './DemoStack';
 var fs= require("fs")
