@@ -11,7 +11,14 @@ RUN yum install -y unzip jq && \
 	amazon-linux-extras install docker 
 
 RUN amazon-linux-extras install python3 
-RUN amazon-linux-extras install pip3
+# RUN amazon-linux-extras install pip3
+
+RUN set -ex \
+	&& python3 -V
+
+RUN curl -O "https://bootstrap.pypa.io/get-pip.py" && python3 get-pip.py --user
+RUN mv /home/kubectl/.local/bin/pip /usr/bin/pip
+RUN pip install flake8
 
 # install aws-cli v2
 RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" && \
@@ -48,12 +55,6 @@ RUN curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2
 # 	&& make && make install \
 # 	&& ln -s /usr/local/python3/bin/python3.7 /usr/local/bin/python3 \
 # 	&& ln -s /usr/local/python3/bin/pip3 /usr/local/bin/pip3 
-	
-RUN set -ex \
-	&& cd /usr/local/python3 \
-	&& python3 -V
-
-RUN /usr/local/python3/bin/pip3 install flake8
 
 # install kubectl
 RUN curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/${KUBECTL_VERSION}/bin/linux/amd64/kubectl && \
